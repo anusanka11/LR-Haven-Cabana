@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="Book your dates at Lion Rock Haven Cabana via WhatsApp." />
+  <title>Book Your Stay | Lion Rock Haven Cabana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="booking-page">
+  <div class="container booking-header"><a class="booking-back" href="index.html">← Back to Lion Rock Haven Cabana</a></div>
+  <main class="container booking-shell">
+    <section class="booking-info">
+      <span class="eyebrow">DIRECT WHATSAPP BOOKING</span>
+      <h1>Choose your dates. We’ll take it from there.</h1>
+      <p>Send your stay details to Lion Rock Haven Cabana. Your request is saved securely to the website database, then you can continue the conversation on WhatsApp.</p>
+      <div class="info-list">
+        <div><strong>WhatsApp</strong><br />076 687 6988</div>
+        <div><strong>Phone</strong><br />077 976 2470</div>
+        <div><strong>Location</strong><br />Sigiriya, Dambulla, Sri Lanka</div>
+      </div>
+      <div class="mini-actions">
+        <a class="btn btn-primary" href="https://wa.me/94766876988" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+        <a class="btn btn-ghost" href="https://www.booking.com/Share-4lCYlT" target="_blank" rel="noopener">Booking.com ↗</a>
+      </div>
+    </section>
+
+    <section class="booking-form-card">
+      <div class="form-head"><span class="section-kicker">RESERVATION REQUEST</span><h2>Tell us about your stay.</h2><p>All fields are used to prepare your booking message.</p></div>
+      <form id="bookingForm" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="name">Name *</label><input id="name" name="name" required maxlength="120" autocomplete="name" /></div>
+          <div class="field"><label for="contact">Contact Number *</label><input id="contact" name="contact" required maxlength="30" autocomplete="tel" /></div>
+          <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required maxlength="160" autocomplete="email" /></div>
+          <div class="field"><label for="id_number">NIC or Passport No *</label><input id="id_number" name="id_number" required maxlength="60" autocomplete="off" /></div>
+          <div class="field"><label for="check_in">Check-in *</label><input id="check_in" name="check_in" type="date" required /></div>
+          <div class="field"><label for="check_out">Check-out *</label><input id="check_out" name="check_out" type="date" required /></div>
+          <div class="field full"><label>Guest type *</label><div class="radio-row"><label class="radio-pill"><input type="radio" name="guest_type" value="Local" required /> Local</label><label class="radio-pill"><input type="radio" name="guest_type" value="Foreign" /> Foreign</label></div></div>
+          <div class="field full"><label for="details">More details</label><textarea id="details" name="details" maxlength="1000" placeholder="Any special requests, number of guests, preferred room, arrival time, etc."></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" id="submitBtn" type="submit">Save & continue to WhatsApp →</button><a class="btn btn-dark" href="index.html">Cancel</a></div>
+        <div id="statusBox" class="status-box" role="status"></div>
+        <p class="fine-print">Your booking request is stored in the property database for management purposes. Do not enter payment-card information in this form.</p>
+      </form>
+    </section>
+  </main>
+<script>
+(function(){
+  const form=document.getElementById('bookingForm');
+  const box=document.getElementById('statusBox');
+  const btn=document.getElementById('submitBtn');
+  const inDate=document.getElementById('check_in');
+  const outDate=document.getElementById('check_out');
+  const pad=n=>String(n).padStart(2,'0');
+  const today=new Date(); today.setHours(0,0,0,0);
+  const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  inDate.min=iso(today); outDate.min=iso(today);
+  inDate.addEventListener('change',()=>{ outDate.min=inDate.value || iso(today); if(outDate.value && outDate.value<outDate.min) outDate.value=''; });
+
+  form.addEventListener('submit',async e=>{
+    e.preventDefault(); box.className='status-box'; box.textContent='';
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    if(outDate.value<=inDate.value){ box.className='status-box show status-error'; box.textContent='Check-out date must be after the check-in date.'; return; }
+    btn.disabled=true; btn.textContent='Saving request…';
+    try{
+      const res=await fetch('api/create_booking.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form).entries()))});
+      const data=await res.json();
+      if(!res.ok || !data.success) throw new Error(data.message || 'Could not save the booking request.');
+      box.className='status-box show status-success';
+      box.innerHTML='Request saved. Click <strong>Continue on WhatsApp</strong> below to send the booking details to Lion Rock Haven Cabana.';
+      const wa=document.createElement('a'); wa.className='btn btn-primary'; wa.style.marginTop='12px'; wa.target='_blank'; wa.rel='noopener'; wa.href=data.whatsapp_url; wa.textContent='Continue on WhatsApp ↗';
+      box.appendChild(document.createElement('br')); box.appendChild(wa);
+      form.reset(); outDate.min=iso(today);
+    }catch(err){
+      box.className='status-box show status-error'; box.textContent=err.message;
+    }finally{ btn.disabled=false; btn.textContent='Save & continue to WhatsApp →'; }
+  });
+})();
+</script>
+</body>
+</html>
