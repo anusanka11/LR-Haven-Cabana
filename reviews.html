@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="hare your experience at Lion Rock Haven Cabana — leave a review on Booking.com or Google." />
+  <title>Leave a Review | Lion Rock Haven Cabana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="booking-page reviews-page">
+  <header class="topbar reviews-topbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Lion Rock Haven Cabana home">
+        <span class="brand-mark">LR</span>
+        <span>
+          <strong>Lion Rock Haven</strong>
+          <small>Cabana · Sigiriya</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav" id="reviewNav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="booking.html">Booking</a>
+        <a class="nav-cta" href="reviews.html">Reviews</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container booking-shell reviews-shell">
+    <section class="booking-info">
+      <span class="eyebrow">GUEST REVIEWS</span>
+      <h1>Thank you for staying with us.</h1>
+      <p>Your feedback helps other travellers find Lion Rock Haven Cabana — and helps us keep getting better. It only takes a minute.</p>
+
+      <div class="info-list">
+        <div><strong>WhatsApp</strong><br />076 687 6988</div>
+        <div><strong>Phone</strong><br />077 976 2470</div>
+        <div><strong>Location</strong><br />Sigiriya, Dambulla, Sri Lanka</div>
+      </div>
+
+      <div class="mini-actions">
+        <a class="btn btn-ghost" href="index.html">Back to home</a>
+        <a class="btn btn-primary" href="booking.html">Book again ↗</a>
+      </div>
+    </section>
+
+    <section class="booking-form-card reviews-card">
+      <div class="form-head">
+        <span class="section-kicker">SHARE YOUR EXPERIENCE</span>
+        <h2>Choose where to leave your review.</h2>
+        <p>Click one of the buttons below. The selected review page will open in a new tab.</p>
+      </div>
+
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
+
+      <div class="review-actions">
+        <a class="review-btn"
+           href="https://www.booking.com/Share-4lCYlT"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Leave a review on Booking.com">
+          <span class="review-icon booking" aria-hidden="true">B.</span>
+          <span class="review-text">
+            <strong>Review on Booking.com</strong>
+            <small>Rate your stay, room, facilities and service.</small>
+          </span>
+          <span class="review-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="review-btn"
+           href="https://maps.app.goo.gl/oSfx5UokYVG8x63F8?g_st=ic"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Leave a review on Google">
+          <span class="review-icon google" aria-hidden="true"><span>G</span></span>
+          <span class="review-text">
+            <strong>Review on Google</strong>
+            <small>Help future guests find us on Google Maps.</small>
+          </span>
+          <span class="review-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <p class="review-note">
+        Had an issue during your stay? Tell us first — we’d love the chance to help.
+        Message us on <a href="https://wa.me/94766876988" target="_blank" rel="noopener noreferrer">WhatsApp 076 687 6988</a>.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#reviewNav');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
