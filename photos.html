@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Photo gallery of Lion Rock Haven Cabana, Sigiriya, Sri Lanka.">
+<meta name="theme-color" content="#0e1f1a">
+<title>Photos | Lion Rock Haven Cabana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+:root{--bg:#f4f0e8;--dark:#0e1f1a;--muted:#68736d}
+body{margin:0;background:var(--bg);color:var(--dark);font-family:"DM Sans",sans-serif}
+.photos-hero{min-height:50vh;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(14,31,26,.08),rgba(14,31,26,.9)),url("assets/images/1.jpg") center/cover}
+.photos-hero-content{padding:110px 0 65px;color:#fff}
+.photos-hero h1{margin:10px 0 15px;font:500 clamp(3rem,7vw,6.2rem)/.98 "Playfair Display",serif;letter-spacing:-.04em}
+.photos-hero h1 em{opacity:.72}
+.photos-hero p{max-width:650px;color:rgba(255,255,255,.82);line-height:1.8}
+.photos-main{padding:80px 0 110px}
+.photos-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}
+.photos-head h2{margin:8px 0 0;font:500 clamp(2rem,4vw,3.5rem)/1 "Playfair Display",serif}
+.photos-head p{max-width:430px;color:var(--muted);line-height:1.7}
+.photo-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:230px;gap:18px}
+.photo{position:relative;overflow:hidden;border-radius:22px;display:block;box-shadow:0 16px 40px rgba(14,31,26,.09);cursor:zoom-in}
+.photo:nth-child(1){grid-column:span 7;grid-row:span 2}.photo:nth-child(2){grid-column:span 5}.photo:nth-child(3){grid-column:span 5}.photo:nth-child(4),.photo:nth-child(5),.photo:nth-child(6){grid-column:span 4;grid-row:span 2}.photo:nth-child(7),.photo:nth-child(8){grid-column:span 6;grid-row:span 2}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.photo:hover img{transform:scale(1.06)}
+.caption{position:absolute;left:16px;right:16px;bottom:16px;padding:13px 15px;border-radius:14px;background:rgba(14,31,26,.5);backdrop-filter:blur(12px);color:#fff}
+.caption small{display:block;opacity:.7;margin-top:2px}
+.back{display:flex;justify-content:center;margin-top:50px}
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(4,12,10,.95);display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;pointer-events:none;transition:.25s}
+.lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:82vh;border-radius:14px;object-fit:contain}
+.lbbtn{position:fixed;width:48px;height:48px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:26px;cursor:pointer}
+.close{top:20px;right:20px}.prev{left:20px;top:50%;transform:translateY(-50%)}.next{right:20px;top:50%;transform:translateY(-50%)}
+.lbtitle{position:fixed;bottom:20px;color:#fff}
+@media(max-width:900px){.photos-head{display:block}.photos-head p{margin-top:18px}.photo-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:250px}.photo:nth-child(n){grid-column:span 1;grid-row:span 1}.photo:nth-child(1),.photo:nth-child(7){grid-column:span 2}}
+@media(max-width:600px){.photos-hero{min-height:60vh}.photos-main{padding:55px 0 75px}.photo-grid{grid-template-columns:1fr;grid-auto-rows:280px;gap:14px}.photo:nth-child(n){grid-column:span 1}.lbbtn{width:44px;height:44px}.prev{left:8px}.next{right:8px}.close{top:10px;right:10px}}
+</style>
+</head>
+<body>
+<div class="site-noise"></div>
+<header class="topbar">
+<div class="container nav-wrap">
+<a class="brand" href="index.html"><span class="brand-mark">LR</span><span><strong>Lion Rock Haven</strong><small>Cabana · Sigiriya</small></span></a>
+<button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+<nav class="nav" aria-label="Main navigation">
+<a href="index.html#stay">Stay</a><a href="index.html#facilities">Facilities</a><a class="active" href="photos.html">Photos</a><a href="index.html#location">Location</a><a class="nav-cta" href="booking.html">Book direct</a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="photos-hero">
+<div class="container photos-hero-content">
+<span class="section-kicker">LION ROCK HAVEN · PHOTO GALLERY</span>
+<h1>See the place.<br><em>Feel the stay.</em></h1>
+<p>Explore our cabana, rooms, outdoor spaces and the atmosphere around Sigiriya. Click any photo to view it full screen.</p>
+</div>
+</section>
+
+<section class="photos-main">
+<div class="container">
+<div class="photos-head">
+<div><span class="section-kicker">OUR GALLERY</span><h2>Photos & <span>moments</span></h2></div>
+<p>Replace the image files in <strong>assets/images/</strong> with your own property photos whenever you are ready.</p>
+</div>
+
+<div class="photo-grid">
+<a class="photo" href="assets/images/1.jpg" data-title="Lion Rock Haven · Photo 01"><img src="assets/images/1.jpg" alt="Lion Rock Haven photo 1" loading="eager"><span class="caption"><strong>Our Cabana</strong><small>Photo 01</small></span></a>
+<a class="photo" href="assets/images/2.jpg" data-title="Lion Rock Haven · Photo 02"><img src="assets/images/2.jpg" alt="Lion Rock Haven photo 2" loading="lazy"><span class="caption"><strong>Our Cabana</strong><small>Photo 02</small></span></a>
+<a class="photo" href="assets/images/3.jpg" data-title="Lion Rock Haven · Photo 03"><img src="assets/images/3.jpg" alt="Lion Rock Haven photo 3" loading="lazy"><span class="caption"><strong>Our Cabana</strong><small>Photo 03</small></span></a>
+<a class="photo" href="assets/images/4.jpg" data-title="Lion Rock Haven · Photo 04"><img src="assets/images/4.jpg" alt="Lion Rock Haven photo 4" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 04</small></span></a>
+<a class="photo" href="assets/images/5.jpg" data-title="Lion Rock Haven · Photo 05"><img src="assets/images/5.jpg" alt="Lion Rock Haven photo 5" loading="lazy"><span class="caption"><strong>Relax & unwind</strong><small>Photo 05</small></span></a>
+<a class="photo" href="assets/images/6.jpg" data-title="Lion Rock Haven · Photo 06"><img src="assets/images/6.jpg" alt="Lion Rock Haven photo 6" loading="lazy"><span class="caption"><strong>Stay experience</strong><small>Photo 06</small></span></a>
+<a class="photo" href="assets/images/7.jpg" data-title="Lion Rock Haven · Photo 07"><img src="assets/images/7.jpg" alt="Lion Rock Haven photo 7" loading="lazy"><span class="caption"><strong>Sigiriya atmosphere</strong><small>Photo 07</small></span></a>
+<a class="photo" href="assets/images/1.jpg" data-title="Lion Rock Haven · Featured Photo"><img src="assets/images/1.jpg" alt="Lion Rock Haven featured photo" loading="lazy"><span class="caption"><strong>Featured view</strong><small>Photo 08</small></span></a>
+</div>
+
+<div class="back"><a class="btn btn-dark" href="index.html#gallery">← Back to home gallery</a></div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container footer-main">
+<div><strong>Lion Rock Haven Cabana</strong><p>Sigiriya, Dambulla, Sri Lanka</p></div>
+<div class="footer-links"><a href="index.html">Home</a><a href="booking.html">Book</a><a href="https://wa.me/94766876988" target="_blank" rel="noopener">WhatsApp</a><a href="reviews.html">Reviews</a></div>
+</div>
+<div class="container footer-bottom"><span>© <span id="year"></span> Lion Rock Haven Cabana</span><span>Website by <strong>Anusanka IT Solution</strong> · 071 494 3887</span></div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+<button class="lbbtn close" id="close" aria-label="Close">×</button>
+<button class="lbbtn prev" id="prev" aria-label="Previous">‹</button>
+<img id="lightboxImg" src="" alt="">
+<button class="lbbtn next" id="next" aria-label="Next">›</button>
+<div class="lbtitle" id="lbtitle"></div>
+</div>
+
+<script>
+const navToggle=document.querySelector(".nav-toggle"),nav=document.querySelector(".nav");
+if(navToggle)navToggle.onclick=()=>{const open=navToggle.getAttribute("aria-expanded")==="true";navToggle.setAttribute("aria-expanded",!open);nav.classList.toggle("open",!open)};
+const cards=[...document.querySelectorAll(".photo")],box=document.getElementById("lightbox"),img=document.getElementById("lightboxImg"),title=document.getElementById("lbtitle");let current=0;
+function show(i){current=(i+cards.length)%cards.length;const c=cards[current];img.src=c.querySelector("img").src;img.alt=c.querySelector("img").alt;title.textContent=c.dataset.title}
+function openBox(i){show(i);box.classList.add("open");box.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
+function closeBox(){box.classList.remove("open");box.setAttribute("aria-hidden","true");document.body.style.overflow=""}
+cards.forEach((c,i)=>c.onclick=e=>{e.preventDefault();openBox(i)});
+document.getElementById("close").onclick=closeBox;
+document.getElementById("prev").onclick=()=>show(current-1);
+document.getElementById("next").onclick=()=>show(current+1);
+box.onclick=e=>{if(e.target===box)closeBox()};
+document.onkeydown=e=>{if(!box.classList.contains("open"))return;if(e.key==="Escape")closeBox();if(e.key==="ArrowLeft")show(current-1);if(e.key==="ArrowRight")show(current+1)};
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
