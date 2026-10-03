@@ -11,33 +11,424 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-:root{--bg:#f4f0e8;--dark:#0e1f1a;--muted:#68736d}
-body{margin:0;background:var(--bg);color:var(--dark);font-family:"DM Sans",sans-serif}
-.photos-hero{min-height:50vh;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(14,31,26,.08),rgba(14,31,26,.9)),url("assets/images/1.jpg") center/cover}
-.photos-hero-content{padding:110px 0 65px;color:#fff}
-.photos-hero h1{margin:10px 0 15px;font:500 clamp(3rem,7vw,6.2rem)/.98 "Playfair Display",serif;letter-spacing:-.04em}
-.photos-hero h1 em{opacity:.72}
-.photos-hero p{max-width:650px;color:rgba(255,255,255,.82);line-height:1.8}
-.photos-main{padding:80px 0 110px}
-.photos-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}
-.photos-head h2{margin:8px 0 0;font:500 clamp(2rem,4vw,3.5rem)/1 "Playfair Display",serif}
-.photos-head p{max-width:430px;color:var(--muted);line-height:1.7}
-.photo-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:230px;gap:18px}
-.photo{position:relative;overflow:hidden;border-radius:22px;display:block;box-shadow:0 16px 40px rgba(14,31,26,.09);cursor:zoom-in}
-.photo:nth-child(1){grid-column:span 7;grid-row:span 2}.photo:nth-child(2){grid-column:span 5}.photo:nth-child(3){grid-column:span 5}.photo:nth-child(4),.photo:nth-child(5),.photo:nth-child(6){grid-column:span 4;grid-row:span 2}.photo:nth-child(7),.photo:nth-child(8){grid-column:span 6;grid-row:span 2}
-.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-.photo:hover img{transform:scale(1.06)}
-.caption{position:absolute;left:16px;right:16px;bottom:16px;padding:13px 15px;border-radius:14px;background:rgba(14,31,26,.5);backdrop-filter:blur(12px);color:#fff}
-.caption small{display:block;opacity:.7;margin-top:2px}
-.back{display:flex;justify-content:center;margin-top:50px}
-.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(4,12,10,.95);display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;pointer-events:none;transition:.25s}
-.lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
-.lightbox img{max-width:92vw;max-height:82vh;border-radius:14px;object-fit:contain}
-.lbbtn{position:fixed;width:48px;height:48px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:26px;cursor:pointer}
-.close{top:20px;right:20px}.prev{left:20px;top:50%;transform:translateY(-50%)}.next{right:20px;top:50%;transform:translateY(-50%)}
-.lbtitle{position:fixed;bottom:20px;color:#fff}
-@media(max-width:900px){.photos-head{display:block}.photos-head p{margin-top:18px}.photo-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:250px}.photo:nth-child(n){grid-column:span 1;grid-row:span 1}.photo:nth-child(1),.photo:nth-child(7){grid-column:span 2}}
-@media(max-width:600px){.photos-hero{min-height:60vh}.photos-main{padding:55px 0 75px}.photo-grid{grid-template-columns:1fr;grid-auto-rows:280px;gap:14px}.photo:nth-child(n){grid-column:span 1}.lbbtn{width:44px;height:44px}.prev{left:8px}.next{right:8px}.close{top:10px;right:10px}}
+:root{
+    --bg:#f4f0e8;
+    --dark:#0e1f1a;
+    --muted:#68736d;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--dark);
+    font-family:"DM Sans",sans-serif;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.photos-hero{
+    min-height:50vh;
+    display:flex;
+    align-items:flex-end;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(14,31,26,.08),
+            rgba(14,31,26,.9)
+        ),
+        url("assets/images/1.jpg") center/cover;
+}
+
+.photos-hero-content{
+    padding:110px 0 65px;
+    color:#fff;
+}
+
+.photos-hero h1{
+    margin:10px 0 15px;
+    font:500 clamp(3rem,7vw,6.2rem)/.98 "Playfair Display",serif;
+    letter-spacing:-.04em;
+}
+
+.photos-hero h1 em{
+    opacity:.72;
+}
+
+.photos-hero p{
+    max-width:650px;
+    color:rgba(255,255,255,.82);
+    line-height:1.8;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.photos-main{
+    padding:80px 0 110px;
+}
+
+.photos-head{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    align-items:end;
+    margin-bottom:35px;
+}
+
+.photos-head h2{
+    margin:8px 0 0;
+    font:500 clamp(2rem,4vw,3.5rem)/1 "Playfair Display",serif;
+}
+
+.photos-head p{
+    max-width:430px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+
+/* =========================
+   PHOTO GRID
+========================= */
+
+.photo-grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    grid-auto-rows:230px;
+    gap:18px;
+}
+
+
+/* =========================
+   PHOTO CARD
+========================= */
+
+.photo{
+    position:relative;
+    overflow:hidden;
+    border-radius:22px;
+    display:block;
+    box-shadow:0 16px 40px rgba(14,31,26,.09);
+    cursor:zoom-in;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:
+        transform .6s ease,
+        filter .6s ease;
+}
+
+.photo:hover img{
+    transform:scale(1.06);
+}
+
+
+/* =========================
+   PHOTO LAYOUT
+========================= */
+
+/* Photo 1 */
+.photo:nth-child(1){
+    grid-column:span 7;
+    grid-row:span 2;
+}
+
+/* Photos 2 & 3 */
+.photo:nth-child(2),
+.photo:nth-child(3){
+    grid-column:span 5;
+}
+
+/* Photos 4, 5 & 6 */
+.photo:nth-child(4),
+.photo:nth-child(5),
+.photo:nth-child(6){
+    grid-column:span 4;
+    grid-row:span 2;
+}
+
+/* Photos 7 & 8 */
+.photo:nth-child(7),
+.photo:nth-child(8){
+    grid-column:span 6;
+    grid-row:span 2;
+}
+
+/* Photos 9 & 10 */
+.photo:nth-child(9),
+.photo:nth-child(10){
+    grid-column:span 6;
+    grid-row:span 2;
+}
+
+/* Photos 11, 12 & 13 */
+.photo:nth-child(11),
+.photo:nth-child(12),
+.photo:nth-child(13){
+    grid-column:span 4;
+    grid-row:span 2;
+}
+
+/* Photos 14 & 15 */
+.photo:nth-child(14),
+.photo:nth-child(15){
+    grid-column:span 6;
+    grid-row:span 2;
+}
+
+/* Photos 16+ */
+.photo:nth-child(n+16){
+    grid-column:span 4;
+    grid-row:span 2;
+}
+
+
+/* =========================
+   CAPTION
+========================= */
+
+.caption{
+    position:absolute;
+    left:16px;
+    right:16px;
+    bottom:16px;
+    padding:13px 15px;
+    border-radius:14px;
+    background:rgba(14,31,26,.5);
+    backdrop-filter:blur(12px);
+    color:#fff;
+}
+
+.caption small{
+    display:block;
+    opacity:.7;
+    margin-top:2px;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back{
+    display:flex;
+    justify-content:center;
+    margin-top:50px;
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:rgba(4,12,10,.95);
+    display:grid;
+    place-items:center;
+    padding:20px;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:.25s;
+}
+
+.lightbox.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.lightbox img{
+    max-width:92vw;
+    max-height:82vh;
+    border-radius:14px;
+    object-fit:contain;
+}
+
+
+/* =========================
+   LIGHTBOX BUTTONS
+========================= */
+
+.lbbtn{
+    position:fixed;
+    width:48px;
+    height:48px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-size:26px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.lbbtn:hover{
+    background:rgba(255,255,255,.18);
+    transform:scale(1.08);
+}
+
+.close{
+    top:20px;
+    right:20px;
+}
+
+.prev{
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.next{
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.prev:hover,
+.next:hover{
+    transform:translateY(-50%) scale(1.08);
+}
+
+.lbtitle{
+    position:fixed;
+    bottom:20px;
+    color:#fff;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:900px){
+
+    .photos-head{
+        display:block;
+    }
+
+    .photos-head p{
+        margin-top:18px;
+    }
+
+    .photo-grid{
+        grid-template-columns:repeat(2,1fr);
+        grid-auto-rows:250px;
+    }
+
+    .photo:nth-child(n){
+        grid-column:span 1;
+        grid-row:span 1;
+    }
+
+    /* Featured images */
+    .photo:nth-child(1),
+    .photo:nth-child(7),
+    .photo:nth-child(9),
+    .photo:nth-child(14){
+        grid-column:span 2;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .photos-hero{
+        min-height:60vh;
+    }
+
+    .photos-main{
+        padding:55px 0 75px;
+    }
+
+    .photo-grid{
+        grid-template-columns:1fr;
+        grid-auto-rows:280px;
+        gap:14px;
+    }
+
+    .photo:nth-child(n){
+        grid-column:span 1;
+        grid-row:span 1;
+    }
+
+    .photo:nth-child(1){
+        grid-row:span 1;
+    }
+
+    .lbbtn{
+        width:44px;
+        height:44px;
+    }
+
+    .prev{
+        left:8px;
+    }
+
+    .next{
+        right:8px;
+    }
+
+    .close{
+        top:10px;
+        right:10px;
+    }
+
+    .lightbox{
+        padding:10px;
+    }
+
+    .lightbox img{
+        max-width:96vw;
+        max-height:80vh;
+    }
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media(max-width:400px){
+
+    .photos-hero-content{
+        padding:90px 20px 45px;
+    }
+
+    .photos-hero h1{
+        font-size:3rem;
+    }
+
+    .photos-main{
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    .photo{
+        border-radius:16px;
+    }
+
+    .caption{
+        left:10px;
+        right:10px;
+        bottom:10px;
+    }
+}
 </style>
 </head>
 <body>
@@ -65,7 +456,7 @@ body{margin:0;background:var(--bg);color:var(--dark);font-family:"DM Sans",sans-
 <div class="container">
 <div class="photos-head">
 <div><span class="section-kicker">OUR GALLERY</span><h2>Photos & <span>moments</span></h2></div>
-<p>Replace the image files in <strong>assets/images/</strong> with your own property photos whenever you are ready.</p>
+<p>This is our Lion Rock Haven photo gallery. Explore the beauty of our property and the surrounding area.</p>
 </div>
 
 <div class="photo-grid">
@@ -76,7 +467,29 @@ body{margin:0;background:var(--bg);color:var(--dark);font-family:"DM Sans",sans-
 <a class="photo" href="assets/images/5.jpg" data-title="Lion Rock Haven · Photo 05"><img src="assets/images/5.jpg" alt="Lion Rock Haven photo 5" loading="lazy"><span class="caption"><strong>Relax & unwind</strong><small>Photo 05</small></span></a>
 <a class="photo" href="assets/images/6.jpg" data-title="Lion Rock Haven · Photo 06"><img src="assets/images/6.jpg" alt="Lion Rock Haven photo 6" loading="lazy"><span class="caption"><strong>Stay experience</strong><small>Photo 06</small></span></a>
 <a class="photo" href="assets/images/7.jpg" data-title="Lion Rock Haven · Photo 07"><img src="assets/images/7.jpg" alt="Lion Rock Haven photo 7" loading="lazy"><span class="caption"><strong>Sigiriya atmosphere</strong><small>Photo 07</small></span></a>
-<a class="photo" href="assets/images/1.jpg" data-title="Lion Rock Haven · Featured Photo"><img src="assets/images/1.jpg" alt="Lion Rock Haven featured photo" loading="lazy"><span class="caption"><strong>Featured view</strong><small>Photo 08</small></span></a>
+<a class="photo" href="assets/images/8.jpg" data-title="Lion Rock Haven · Photo 08"><img src="assets/images/8.jpg" alt="Lion Rock Haven photo 8" loading="lazy"><span class="caption"><strong>Featured view</strong><small>Photo 08</small></span></a>
+<a class="photo" href="assets/images/9.jpg" data-title="Lion Rock Haven · Photo 09"><img src="assets/images/9.jpg" alt="Lion Rock Haven photo 9" loading="lazy"><span class="caption"><strong>Featured view</strong><small>Photo 09</small></span></a>
+<a class="photo" href="assets/images/10.jpg" data-title="Lion Rock Haven · Photo 10"><img src="assets/images/10.jpg" alt="Lion Rock Haven photo 10" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 10</small></span></a>
+<a class="photo" href="assets/images/11.jpg" data-title="Lion Rock Haven · Photo 11"><img src="assets/images/11.jpg" alt="Lion Rock Haven photo 11" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 11</small></span></a>
+<a class="photo" href="assets/images/12.jpg" data-title="Lion Rock Haven · Photo 12"><img src="assets/images/12.jpg" alt="Lion Rock Haven photo 12" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 12</small></span></a>
+<a class="photo" href="assets/images/13.jpg" data-title="Lion Rock Haven · Photo 13"><img src="assets/images/13.jpg" alt="Lion Rock Haven photo 13" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 13</small></span></a>
+<a class="photo" href="assets/images/14.jpg" data-title="Lion Rock Haven · Photo 14"><img src="assets/images/14.jpg" alt="Lion Rock Haven photo 14" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 14</small></span></a>
+<a class="photo" href="assets/images/15.jpg" data-title="Lion Rock Haven · Photo 15"><img src="assets/images/15.jpg" alt="Lion Rock Haven photo 15" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 15</small></span></a>
+<a class="photo" href="assets/images/16.jpg" data-title="Lion Rock Haven · Photo 16"><img src="assets/images/16.jpg" alt="Lion Rock Haven photo 16" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 16</small></span></a>
+<a class="photo" href="assets/images/17.jpg" data-title="Lion Rock Haven · Photo 17"><img src="assets/images/17.jpg" alt="Lion Rock Haven photo 17" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 17</small></span></a>
+<a class="photo" href="assets/images/18.jpg" data-title="Lion Rock Haven · Photo 18"><img src="assets/images/18.jpg" alt="Lion Rock Haven photo 18" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 18</small></span></a>
+<a class="photo" href="assets/images/19.jpg" data-title="Lion Rock Haven · Photo 19"><img src="assets/images/19.jpg" alt="Lion Rock Haven photo 19" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 19</small></span></a>
+<a class="photo" href="assets/images/20.jpg" data-title="Lion Rock Haven · Photo 20"><img src="assets/images/20.jpg" alt="Lion Rock Haven photo 20" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 20</small></span></a>
+<a class="photo" href="assets/images/21.jpg" data-title="Lion Rock Haven · Photo 21"><img src="assets/images/21.jpg" alt="Lion Rock Haven photo 21" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 21</small></span></a>
+<a class="photo" href="assets/images/22.jpg" data-title="Lion Rock Haven · Photo 22"><img src="assets/images/22.jpg" alt="Lion Rock Haven photo 22" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 22</small></span></a>
+<a class="photo" href="assets/images/23.jpg" data-title="Lion Rock Haven · Photo 23"><img src="assets/images/23.jpg" alt="Lion Rock Haven photo 23" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 23</small></span></a>
+<a class="photo" href="assets/images/24.jpg" data-title="Lion Rock Haven · Photo 24"><img src="assets/images/24.jpg" alt="Lion Rock Haven photo 24" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 24</small></span></a>
+<a class="photo" href="assets/images/25.jpg" data-title="Lion Rock Haven · Photo 25"><img src="assets/images/25.jpg" alt="Lion Rock Haven photo 25" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 25</small></span></a>
+<a class="photo" href="assets/images/26.jpg" data-title="Lion Rock Haven · Photo 26"><img src="assets/images/26.jpg" alt="Lion Rock Haven photo 26" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 26</small></span></a>
+<a class="photo" href="assets/images/27.jpg" data-title="Lion Rock Haven · Photo 27"><img src="assets/images/27.jpg" alt="Lion Rock Haven photo 27" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 27</small></span></a>
+<a class="photo" href="assets/images/28.jpg" data-title="Lion Rock Haven · Photo 28"><img src="assets/images/28.jpg" alt="Lion Rock Haven photo 28" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 28</small></span></a>
+<a class="photo" href="assets/images/29.jpg" data-title="Lion Rock Haven · Photo 29"><img src="assets/images/29.jpg" alt="Lion Rock Haven photo 29" loading="lazy"><span class="caption"><strong>Property</strong><small>Photo 29</small></span></a>
+
 </div>
 
 <div class="back"><a class="btn btn-dark" href="index.html#gallery">← Back to home gallery</a></div>
